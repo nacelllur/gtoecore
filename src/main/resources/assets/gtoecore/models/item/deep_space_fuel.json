@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gtoecore:item/deep_space_fuel"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gtoecore:item/survey_drone_zpm"
+  }
+}

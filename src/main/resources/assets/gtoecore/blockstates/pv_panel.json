@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "gtoecore:block/pv_panel" },
+    "type=top": { "model": "gtoecore:block/pv_panel_top" },
+    "type=double": { "model": "gtoecore:block/pv_panel_full" }
+  }
+}

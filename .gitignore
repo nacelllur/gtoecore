@@ -1,0 +1,23 @@
+# ===== GregTech: Orbital Era — gtoecore 源码仓库 =====
+# 构建产物 / 缓存 / 依赖（不入库）
+/build/
+/.gradle/
+/libs/
+*.jar
+*.log
+*.bin
+*.bak
+*.tmp
+
+# 本机调试临时文件（不入库）
+/build_*.log
+/build_log.txt
+*.txt
+
+# IDE / 系统
+.idea/
+.vscode/
+*.iml
+Thumbs.db
+Desktop.ini
+.DS_Store

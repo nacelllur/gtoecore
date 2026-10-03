@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "IMI",
+    "IMI"
+  ],
+  "key": {
+    "P": {
+      "item": "gtceu:polytetrafluoroethylene_plate"
+    },
+    "I": {
+      "item": "gtceu:mv_input_hatch"
+    },
+    "M": {
+      "item": "gtceu:mv_machine_hull"
+    }
+  },
+  "result": {
+    "item": "gtoecore:clone_production_workshop",
+    "count": 1
+  }
+}

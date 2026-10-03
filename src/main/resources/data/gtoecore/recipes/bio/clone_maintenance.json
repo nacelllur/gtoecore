@@ -1,0 +1,34 @@
+{
+  "type": "gtceu:bio",
+  "duration": 200,
+  "inputs": {
+    "item": [
+      {
+        "content": {
+          "item": "gtoecore:bio_cluster"
+        }
+      }
+    ],
+    "fluid": [
+      {
+        "content": {
+          "value": [
+            {
+              "fluid": "minecraft:water"
+            }
+          ],
+          "amount": 1000
+        }
+      }
+    ]
+  },
+  "outputs": {
+    "item": [
+      {
+        "content": {
+          "item": "gtoecore:clone"
+        }
+      }
+    ]
+  }
+}

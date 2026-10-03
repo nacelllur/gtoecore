@@ -1,0 +1,52 @@
+plugins {
+    id 'eclipse'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+
+version = '0.1.0'
+group = 'com.gtncore'
+
+base { archivesName = 'gtoecore-1.20.1' }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    // 官方映射，1.20.1
+    mappings channel: 'official', version: '1.20.1'
+}
+
+repositories {
+    maven { url = 'https://maven.gtceu.com' }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.3.0'
+
+    // GTM addon 依赖：直接对齐 GT-New 整合包内实机 jar（官方映射，无需 deobf）
+    implementation files('libs/gtceu-1.20.1-7.5.3.jar')
+    implementation files('libs/ldlib-forge-1.20.1-1.0.50.jar')
+    implementation files('libs/Registrate-MC1.20-1.3.11.jar')
+    // Jade HUD（可选集成：仅编译期使用，运行时由整合包内的 Jade 提供）
+    implementation files('libs/Jade-1.20.1-Forge-11.13.2.jar')
+    // space_gravity 零重力 API（软依赖：仅编译期，运行时由整合包提供，缺失时桥接自动降级）
+    compileOnly files('libs/space_gravity-1.0.1-nolimit-damp.jar')
+}
+
+jar {
+    manifest {
+        attributes([
+                'Specification-Title'   : 'gtoecore',
+                'Specification-Vendor'  : 'gtoecore',
+                'Specification-Version' : '1',
+                'Implementation-Title'  : 'GT-New Core',
+                'Implementation-Version': project.version
+        ])
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+// Forge 1.20.1 生产环境为 SRG 命名，发布 jar 必须 reobf
+jar.finalizedBy('reobfJar')

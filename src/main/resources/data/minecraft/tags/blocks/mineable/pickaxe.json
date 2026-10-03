@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "gtoecore:primitive_computer_casing",
+    "gtoecore:primitive_heat_vent",
+    "gtoecore:primitive_empty_component",
+    "gtoecore:primitive_computation_component",
+    "gtoecore:deep_space_hub",
+    "gtoecore:parallel_module",
+    "gtoecore:overclock_module",
+    "gtoecore:efficiency_module",
+    "gtoecore:output_module",
+    "gtoecore:sensing_module",
+    "gtoecore:recycler_module"
+  ]
+}

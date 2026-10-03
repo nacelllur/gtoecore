@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "gtoecore:block/pv_panel_bottom",
+    "top": "gtoecore:block/pv_panel_top",
+    "side": "gtoecore:block/pv_panel_side"
+  }
+}

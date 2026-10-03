@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "OMO",
+    "OMO"
+  ],
+  "key": {
+    "P": {
+      "item": "gtceu:polytetrafluoroethylene_plate"
+    },
+    "O": {
+      "item": "gtceu:mv_output_hatch"
+    },
+    "M": {
+      "item": "gtceu:mv_machine_hull"
+    }
+  },
+  "result": {
+    "item": "gtoecore:clone_manufacturing_chamber",
+    "count": 1
+  }
+}

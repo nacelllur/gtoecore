@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "IMO",
+    "IMI"
+  ],
+  "key": {
+    "P": {
+      "item": "gtceu:polytetrafluoroethylene_plate"
+    },
+    "I": {
+      "item": "gtceu:mv_input_hatch"
+    },
+    "O": {
+      "item": "gtceu:mv_output_hatch"
+    },
+    "M": {
+      "item": "gtceu:mv_machine_hull"
+    }
+  },
+  "result": {
+    "item": "gtoecore:clone_maintenance_room",
+    "count": 1
+  }
+}

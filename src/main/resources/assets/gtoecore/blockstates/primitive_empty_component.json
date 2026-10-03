@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtoecore:block/primitive_empty_component"
+    }
+  }
+}

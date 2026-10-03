@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "gtoecore:block/station_gravity_core" }
+  }
+}

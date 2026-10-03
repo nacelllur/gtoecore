@@ -1,0 +1,46 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="gtoecore"
+version="0.1.0"
+displayName="GTOE Core"
+authors="Pack Author"
+description='''GregTech: Orbital Era 整合包专属内容 mod：自定义多方块机器与配套内容。'''
+
+[[dependencies.gtoecore]]
+modId="gtceu"
+mandatory=true
+versionRange="[7.4,7.6)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.gtoecore]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.gtoecore]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.gtoecore]]
+modId="space_gravity"
+mandatory=false
+versionRange="[1.0,)"
+ordering="AFTER"
+side="BOTH"
+
+# 排在 ad_astra 之后加载：使 gtoecore 内置数据包（轨道维度重力覆盖）优先级高于 ad_astra 原版数据
+[[dependencies.gtoecore]]
+modId="ad_astra"
+mandatory=false
+versionRange="[1.15,)"
+ordering="AFTER"
+side="BOTH"
