@@ -3,6 +3,7 @@ package com.gtoecore;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gtoecore.item.GTNCloneItem;
 import com.gtoecore.item.GTNDroneItem;
+import com.gtoecore.item.RotaryMillItem;
 import com.gtoecore.station.StationGravityCoreItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -48,6 +49,43 @@ public final class GTNItems {
     public static final RegistryObject<Item> PV_PANEL =
             ITEMS.register("pv_panel",
                     () -> new BlockItem(GTNBlocks.PV_PANEL.get(), new Item.Properties()));
+
+    // ---------------- GT6 风味能量系统方块物品 ----------------
+
+    /** 旋转轴（RU 导体） */
+    public static final RegistryObject<Item> ROTATION_AXLE =
+            ITEMS.register("rotation_axle",
+                    () -> new BlockItem(GTNBlocks.ROTATION_AXLE.get(), new Item.Properties()));
+
+    /** 导热管（HU 导体） */
+    public static final RegistryObject<Item> HEAT_PIPE =
+            ITEMS.register("heat_pipe",
+                    () -> new BlockItem(GTNBlocks.HEAT_PIPE.get(), new Item.Properties()));
+
+    /** 冷凝管（CU 导体） */
+    public static final RegistryObject<Item> COLD_PIPE =
+            ITEMS.register("cold_pipe",
+                    () -> new BlockItem(GTNBlocks.COLD_PIPE.get(), new Item.Properties()));
+
+    /** 动能杆（KU 导体） */
+    public static final RegistryObject<Item> KINETIC_ROD =
+            ITEMS.register("kinetic_rod",
+                    () -> new BlockItem(GTNBlocks.KINETIC_ROD.get(), new Item.Properties()));
+
+    /** 燃烧引擎（RU 产能机） */
+    public static final RegistryObject<Item> COMBUSTION_ENGINE =
+            ITEMS.register("combustion_engine",
+                    () -> new BlockItem(GTNBlocks.COMBUSTION_ENGINE.get(), new Item.Properties()));
+
+    /** 转速检测器（RU 接收端 → 红石） */
+    public static final RegistryObject<Item> SPEED_DETECTOR =
+            ITEMS.register("speed_detector",
+                    () -> new BlockItem(GTNBlocks.SPEED_DETECTOR.get(), new Item.Properties()));
+
+    /** 旋转石磨（RU 消费端 —— 燃烧引擎的实际用电器） */
+    public static final RegistryObject<Item> ROTARY_MILL =
+            ITEMS.register("rotary_mill",
+                    () -> new RotaryMillItem(GTNBlocks.ROTARY_MILL.get(), new Item.Properties()));
 
     /** 原始计算机外壳 —— 无人机蜂群之心结构方块（方块注册见 {@link GTNBlocks}） */
     public static final RegistryObject<Item> PRIMITIVE_COMPUTER_CASING =

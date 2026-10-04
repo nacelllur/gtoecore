@@ -80,6 +80,9 @@ public final class GTNMachines {
 
     // ---- 深空枢纽体系（主机 + 6 类可无限叠加的扩展模块）----
     public static MultiblockMachineDefinition DEEP_SPACE_HUB;
+
+    // ---- GT6 风味能量输入仓（单方块部件机器，复用 PartAbility.INPUT_ENERGY）----
+    public static MachineDefinition GTO_ENERGY_INPUT_HATCH;
     /** 扩展模块定义，索引 = ModuleKind.ordinal() */
     public static final MultiblockMachineDefinition[] DEEP_SPACE_MODULES =
             new MultiblockMachineDefinition[ModuleKind.values().length];
@@ -115,6 +118,9 @@ public final class GTNMachines {
         REGISTERED.add(DEEP_SPACE_HUB = registerDeepSpaceHub());
         for (ModuleKind kind : ModuleKind.values()) {
             REGISTERED.add(DEEP_SPACE_MODULES[kind.ordinal()] = registerDeepSpaceModule(kind));
+
+        // ---- GT6 风味能量输入仓（复用 INPUT_ENERGY ⇒ 所有 pattern 的能量位自动接受）----
+        REGISTERED.add(GTO_ENERGY_INPUT_HATCH = registerGTOEnergyInputHatch());
         }
 
         // 修改已有 GT/GCYM 多方块（结构/修饰器/配方类型），见 GTNMachineOverrides
@@ -549,8 +555,8 @@ public final class GTNMachines {
                             .build();
                 })
                 .workableCasingModel(
-                        new ResourceLocation("minecraft", "block/smooth_quartz"),
-                        GTNCoreGT.id("block/multiblock/deep_space_hub"))
+                GTNCoreGT.id("block/casing/deep_space_hub"),
+                GTNCoreGT.id("block/multiblock/deep_space_hub"))
                 .register();
         return def;
     }
@@ -598,8 +604,8 @@ public final class GTNMachines {
                         .where('A', Predicates.air())
                         .build())
                 .workableCasingModel(
-                        new ResourceLocation("minecraft", "block/light_gray_concrete"),
-                        GTNCoreGT.id("block/multiblock/deep_space_module"))
+                GTNCoreGT.id("block/casing/deep_space_module"),
+                GTNCoreGT.id("block/multiblock/deep_space_module"))
                 .register();
         return def;
     }
@@ -659,5 +665,23 @@ public final class GTNMachines {
                 .register();
         REGISTERED.add(def);
         return def;
+    }
+
+    /**
+     * GT6 风味能量输入仓 —— 单方块部件机器。
+     *
+     * <p>复用 {@link PartAbility#INPUT_ENERGY}：现有所有多方块结构里
+     * {@code Predicates.abilities(PartAbility.INPUT_ENERGY)} 的能量位都能直接接受本仓，
+     * 无需改动任何现有机器 pattern。仓本身不存能量，只做"信号透传"：
+     * 相邻 GTO 导体每 tick 刷新仓内值，配方条件（GTOEnergyRangeCondition）读仓内实时值。</p>
+     */
+    private static MachineDefinition registerGTOEnergyInputHatch() {
+        return REGISTRATE
+                .machine("gtoe_energy_input_hatch", GTOEnergyInputHatchPartMachine::new)
+                .langValue("GTOE 能量输入仓")
+                .rotationState(RotationState.ALL)
+                .abilities(PartAbility.INPUT_ENERGY)
+                .simpleModel(GTNCoreGT.id("block/machine/gtoe_energy_input_hatch"))
+                .register();
     }
 }

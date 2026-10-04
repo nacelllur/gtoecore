@@ -3,14 +3,14 @@
   "loader": "gtceu:machine",
   "machine": "gtoecore:efficiency_module",
   "texture_overrides": {
-    "all": "minecraft:block/light_gray_concrete"
+    "all": "gtoecore:block/casing/deep_space_module"
   },
   "variants": {
     "is_formed=false,recipe_logic_status=idle": {
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "minecraft:block/light_gray_concrete",
+          "all": "gtoecore:block/casing/deep_space_module",
           "overlay_front": "gtoecore:block/multiblock/deep_space_module/overlay_front",
           "overlay_front_emissive": "gtoecore:block/multiblock/deep_space_module/overlay_front_emissive"
         }
@@ -20,7 +20,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "minecraft:block/light_gray_concrete",
+          "all": "gtoecore:block/casing/deep_space_module",
           "overlay_front": "gtoecore:block/multiblock/deep_space_module/overlay_front",
           "overlay_front_emissive": "gtoecore:block/multiblock/deep_space_module/overlay_front_emissive"
         }
@@ -30,7 +30,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "minecraft:block/light_gray_concrete",
+          "all": "gtoecore:block/casing/deep_space_module",
           "overlay_front": "gtoecore:block/multiblock/deep_space_module/overlay_front_active",
           "overlay_front_emissive": "gtoecore:block/multiblock/deep_space_module/overlay_front_active_emissive"
         }
@@ -40,7 +40,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "minecraft:block/light_gray_concrete",
+          "all": "gtoecore:block/casing/deep_space_module",
           "overlay_front": "gtoecore:block/multiblock/deep_space_module/overlay_front_active",
           "overlay_front_emissive": "gtoecore:block/multiblock/deep_space_module/overlay_front_active_emissive"
         }
@@ -50,7 +50,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "minecraft:block/light_gray_concrete",
+          "all": "gtoecore:block/casing/deep_space_module",
           "overlay_front": "gtoecore:block/multiblock/deep_space_module/overlay_front",
           "overlay_front_emissive": "gtoecore:block/multiblock/deep_space_module/overlay_front_emissive"
         }
@@ -60,7 +60,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "minecraft:block/light_gray_concrete",
+          "all": "gtoecore:block/casing/deep_space_module",
           "overlay_front": "gtoecore:block/multiblock/deep_space_module/overlay_front",
           "overlay_front_emissive": "gtoecore:block/multiblock/deep_space_module/overlay_front_emissive"
         }
@@ -70,7 +70,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "minecraft:block/light_gray_concrete",
+          "all": "gtoecore:block/casing/deep_space_module",
           "overlay_front": "gtoecore:block/multiblock/deep_space_module/overlay_front_active",
           "overlay_front_emissive": "gtoecore:block/multiblock/deep_space_module/overlay_front_active_emissive"
         }
@@ -80,7 +80,7 @@
       "model": {
         "parent": "gtceu:block/machine/template/cube_all/sided",
         "textures": {
-          "all": "minecraft:block/light_gray_concrete",
+          "all": "gtoecore:block/casing/deep_space_module",
           "overlay_front": "gtoecore:block/multiblock/deep_space_module/overlay_front_active",
           "overlay_front_emissive": "gtoecore:block/multiblock/deep_space_module/overlay_front_active_emissive"
         }

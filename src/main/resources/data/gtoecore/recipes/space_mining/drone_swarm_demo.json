@@ -1,0 +1,31 @@
+{
+  "type": "gtceu:space_mining",
+  "duration": 120,
+  "conditions": [
+    {
+      "type": "energy_range",
+      "reverse": false,
+      "energy": "ru",
+      "min": 64,
+      "max": 999999
+    }
+  ],
+  "inputs": {
+    "item": [
+      {
+        "content": {
+          "item": "gtoecore:mining_drone_lv"
+        }
+      }
+    ]
+  },
+  "outputs": {
+    "item": [
+      {
+        "content": {
+          "item": "gtoecore:bio_cluster"
+        }
+      }
+    ]
+  }
+}

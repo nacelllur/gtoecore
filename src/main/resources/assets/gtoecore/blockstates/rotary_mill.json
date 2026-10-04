@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,lit=false": { "model": "gtoecore:block/rotary_mill" },
+    "facing=south,lit=false": { "model": "gtoecore:block/rotary_mill", "y": 180 },
+    "facing=west,lit=false":  { "model": "gtoecore:block/rotary_mill", "y": 270 },
+    "facing=east,lit=false":  { "model": "gtoecore:block/rotary_mill", "y": 90 },
+    "facing=north,lit=true":  { "model": "gtoecore:block/rotary_mill" },
+    "facing=south,lit=true":  { "model": "gtoecore:block/rotary_mill", "y": 180 },
+    "facing=west,lit=true":   { "model": "gtoecore:block/rotary_mill", "y": 270 },
+    "facing=east,lit=true":   { "model": "gtoecore:block/rotary_mill", "y": 90 }
+  }
+}

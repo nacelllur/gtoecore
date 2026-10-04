@@ -1,0 +1,16 @@
+{
+  "elements": [
+    {
+      "from": [4, 7, 4],
+      "to": [12, 12, 12],
+      "faces": {
+        "up":    { "uv": [0, 0, 16, 16], "texture": "gtoecore:block/energy/quern_wheel_top" },
+        "down":  { "uv": [0, 0, 16, 16], "texture": "gtoecore:block/energy/quern_base_top" },
+        "north": { "uv": [0, 0, 16, 16], "texture": "gtoecore:block/energy/quern_wheel_side" },
+        "south": { "uv": [0, 0, 16, 16], "texture": "gtoecore:block/energy/quern_wheel_side" },
+        "east":  { "uv": [0, 0, 16, 16], "texture": "gtoecore:block/energy/quern_wheel_side" },
+        "west":  { "uv": [0, 0, 16, 16], "texture": "gtoecore:block/energy/quern_wheel_side" }
+      }
+    }
+  ]
+}

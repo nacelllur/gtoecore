@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "bottom": "gtceu:block/casings/voltage/lv/bottom",
+    "side": "gtceu:block/casings/voltage/lv/side",
+    "top": "gtceu:block/casings/voltage/lv/top",
+    "overlay": "gtoecore:block/overlay/gtoe_energy_input"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "down": {"texture": "#bottom", "cullface": "down"},
+        "up": {"texture": "#top", "cullface": "up"},
+        "north": {"texture": "#side", "cullface": "north"},
+        "south": {"texture": "#side", "cullface": "south"},
+        "west": {"texture": "#side", "cullface": "west"},
+        "east": {"texture": "#side", "cullface": "east"}
+      }
+    },
+    {
+      "from": [0, 0, 15.5],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#overlay"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#overlay"},
+        "up": {"uv": [0, 0, 16, 0.5], "texture": "#overlay"},
+        "down": {"uv": [0, 15.5, 16, 16], "texture": "#overlay"},
+        "east": {"uv": [15.5, 0, 16, 16], "texture": "#overlay"},
+        "west": {"uv": [0, 0, 0.5, 16], "texture": "#overlay"}
+      }
+    }
+  ]
+}

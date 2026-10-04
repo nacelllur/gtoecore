@@ -1,5 +1,14 @@
 package com.gtoecore;
 
+import com.gtoecore.energy.GTOEnergyType;
+import com.gtoecore.energy.block.CombustionEngineBlock;
+import com.gtoecore.energy.block.CombustionEngineBlockEntity;
+import com.gtoecore.energy.block.GTOConduitBlock;
+import com.gtoecore.energy.block.GTOConduitBlockEntity;
+import com.gtoecore.energy.block.RotaryMillBlock;
+import com.gtoecore.energy.block.RotaryMillBlockEntity;
+import com.gtoecore.energy.block.SpeedDetectorBlock;
+import com.gtoecore.energy.block.SpeedDetectorBlockEntity;
 import com.gtoecore.station.StationGravityCoreBlock;
 import com.gtoecore.station.StationGravityCoreBlockEntity;
 import net.minecraft.world.level.block.Block;
@@ -92,6 +101,100 @@ public final class GTNBlocks {
                             .strength(1.5f, 6.0f)
                             .sound(SoundType.METAL)
                             .requiresCorrectToolForDrops()));
+
+    // ---------------- GT6 风味能量导体（GTOEnergyType 四形式各一实例） ----------------
+
+    /** 旋转轴（RU）—— 转速沿轴链逐节损耗传递 */
+    public static final RegistryObject<GTOConduitBlock> ROTATION_AXLE =
+            BLOCKS.register("rotation_axle", () -> new GTOConduitBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_GRAY)
+                            .strength(2.0f, 6.0f)
+                            .sound(SoundType.METAL),
+                    GTOEnergyType.ROTATION));
+
+    /** 导热管（HU）—— 热源温度沿管链逐节耗散 */
+    public static final RegistryObject<GTOConduitBlock> HEAT_PIPE =
+            BLOCKS.register("heat_pipe", () -> new GTOConduitBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_RED)
+                            .strength(2.0f, 6.0f)
+                            .sound(SoundType.METAL),
+                    GTOEnergyType.HEAT));
+
+    /** 冷凝管（CU）—— 冷源低温沿管链逐节回升 */
+    public static final RegistryObject<GTOConduitBlock> COLD_PIPE =
+            BLOCKS.register("cold_pipe", () -> new GTOConduitBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_LIGHT_BLUE)
+                            .strength(2.0f, 6.0f)
+                            .sound(SoundType.METAL),
+                    GTOEnergyType.COLD));
+
+    /** 动能杆（KU）—— 活塞压强沿杆链逐节衰减 */
+    public static final RegistryObject<GTOConduitBlock> KINETIC_ROD =
+            BLOCKS.register("kinetic_rod", () -> new GTOConduitBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_ORANGE)
+                            .strength(2.0f, 6.0f)
+                            .sound(SoundType.METAL),
+                    GTOEnergyType.KINETIC));
+
+    /** 全部导体共用的 BlockEntity（一个 BE type 绑定四种导体方块） */
+    public static final RegistryObject<BlockEntityType<GTOConduitBlockEntity>> GTO_CONDUIT_BE =
+            BLOCK_ENTITIES.register("gto_conduit",
+                    () -> BlockEntityType.Builder
+                            .of(GTOConduitBlockEntity::new,
+                                    ROTATION_AXLE.get(), HEAT_PIPE.get(),
+                                    COLD_PIPE.get(), KINETIC_ROD.get())
+                            .build(null));
+
+    // ---------------- GT6 风味能量产能机：燃烧引擎（RU 来源） ----------------
+
+    public static final RegistryObject<CombustionEngineBlock> COMBUSTION_ENGINE =
+            BLOCKS.register("combustion_engine", () -> new CombustionEngineBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_BROWN)
+                            .strength(3.0f, 8.0f)
+                            .sound(SoundType.METAL)
+                            .requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<BlockEntityType<CombustionEngineBlockEntity>> COMBUSTION_ENGINE_BE =
+            BLOCK_ENTITIES.register("combustion_engine",
+                    () -> BlockEntityType.Builder
+                            .of(CombustionEngineBlockEntity::new, COMBUSTION_ENGINE.get())
+                            .build(null));
+
+    // ---------------- GT6 风味能量接收端：转速检测器（RU → 红石） ----------------
+
+    public static final RegistryObject<SpeedDetectorBlock> SPEED_DETECTOR =
+            BLOCKS.register("speed_detector", () -> new SpeedDetectorBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_YELLOW)
+                            .strength(2.0f, 6.0f)
+                            .sound(SoundType.METAL)));
+
+    public static final RegistryObject<BlockEntityType<SpeedDetectorBlockEntity>> SPEED_DETECTOR_BE =
+            BLOCK_ENTITIES.register("speed_detector",
+                    () -> BlockEntityType.Builder
+                            .of(SpeedDetectorBlockEntity::new, SPEED_DETECTOR.get())
+                            .build(null));
+
+    // ---------------- GT6 风味能量消费端：旋转石磨（RU → 磨矿） ----------------
+
+    public static final RegistryObject<RotaryMillBlock> ROTARY_MILL =
+            BLOCKS.register("rotary_mill", () -> new RotaryMillBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_GRAY)
+                            .strength(3.0f, 8.0f)
+                            .sound(SoundType.METAL)
+                            .requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<BlockEntityType<RotaryMillBlockEntity>> ROTARY_MILL_BE =
+            BLOCK_ENTITIES.register("rotary_mill",
+                    () -> BlockEntityType.Builder
+                            .of(RotaryMillBlockEntity::new, ROTARY_MILL.get())
+                            .build(null));
 
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);

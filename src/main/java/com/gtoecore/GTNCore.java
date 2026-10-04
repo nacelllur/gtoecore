@@ -24,6 +24,9 @@ public class GTNCore {
         GTNBlocks.register(FMLJavaModLoadingContext.get().getModEventBus());
         // 普通物品（克隆体 / 生物团 / 重力核心物品）
         GTNItems.register(FMLJavaModLoadingContext.get().getModEventBus());
+        // 燃烧引擎 GUI 容器类型
+        com.gtoecore.energy.block.CombustionEngineMenu.registerMenuTypes(
+                FMLJavaModLoadingContext.get().getModEventBus());
         LOGGER.info("GT-New Core loaded");
     }
 }
