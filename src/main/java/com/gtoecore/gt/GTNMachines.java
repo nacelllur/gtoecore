@@ -287,10 +287,13 @@ public final class GTNMachines {
                 "cms_rig", CmsRigDynamicRender::new,
                 CmsRigMachine.PLATE_HALF_LR, CmsRigMachine.PLATE_HALF_FB));
         // LHC 环线：1×1×1 —— 完全没有底座，放下即成形。
-        REGISTERED.add(LHC_COMBO = GTNRigMachines.registerDecorRig(
-                "lhc_combo", LhcComboRigMachine::new, "LHC Combo",
-                "lhc_combo", LhcComboRigDynamicRender::new,
-                0, 0, 0, 0, 4));
+        // ⏸ 2026-10-14 用户要求「暂时移除 lhc 结构」⇒ 暂停注册（资源文件全部保留）。
+        //    恢复方法：取消下面两行的注释即可（Java / 碰撞表 / OBJ / lang 都还在原位）。
+        // REGISTERED.add(LHC_COMBO = GTNRigMachines.registerDecorRig(
+        //         "lhc_combo", LhcComboRigMachine::new, "LHC Combo",
+        //         "lhc_combo", LhcComboRigDynamicRender::new,
+        //         0, 0, 0, 0, 4));
+        LHC_COMBO = null;
 
         // 修改已有 GT/GCYM 多方块（结构/修饰器/配方类型），见 GTNMachineOverrides
         GTNMachineOverrides.applyAll();

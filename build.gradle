@@ -32,6 +32,9 @@ dependencies {
     compileOnly files('libs/space_gravity-1.0.1-nolimit-damp.jar')
     // AE2（软件依赖：仅编译期引用其 API/GUI，运行时由整合包提供）
     compileOnly files('libs/appliedenergistics2-forge-15.4.10.jar')
+    // 注意：ad_astra 是**可选**第三方 mod —— 不在这里 compileOnly（本 mod 对它的
+    // 唯一接触点是「按 id 查实体类型 + 后注册覆盖渲染器」，只用原版 API，
+    // 见 client/RocketRigRenderer）。靠 mods.toml 的 ordering="AFTER" 保证覆盖顺序。
 }
 
 jar {

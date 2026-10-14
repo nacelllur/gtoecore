@@ -281,12 +281,28 @@ public final class RigCollision {
      */
     private static final int CLEAR_BACK_TOLERANCE = 4;
 
+    // ------------------------------------------------------------------
+    // ⏸ 全局开关：暂时停用所有机架的碰撞体（2026-10-14 用户要求「暂时移除所有碰撞体」）
+    //
+    // false = 机器照常成形/照常显示塔，但**一个碰撞方块都不铺**。
+    //         已经有残留的机器重新成形时会顺带清掉残留（start 改走 clear 分支）。
+    //         拆机时照旧会清（clear 不受影响）。
+    // ⇒ 想恢复：把这里改回 true 即可（唯一开关，不用动别处）。
+    // ------------------------------------------------------------------
+    public static final boolean ENABLED = false;
+
     /**
      * 铺开某台机器的整片碰撞体，并把它登记为「活跃」（之后由 {@link #tickAll} 定期补块）。
      * 重复调用是安全的（只补空缺格）。
+     *
+     * <p>⚠ {@link #ENABLED} = false 时**只清不铺** —— 保证关掉开关后世界不会留残骸。</p>
      */
     public static void start(ServerLevel level, BlockPos origin, Direction axisX, Direction axisZ,
                              String tablePath) {
+        if (!ENABLED) {
+            clear(level, origin, axisX, axisZ, tablePath);
+            return;
+        }
         markActive(level, origin, axisX, axisZ, tablePath);
         enqueue(level, origin, axisX, axisZ, tablePath, true);
     }
