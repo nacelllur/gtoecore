@@ -54,6 +54,8 @@ public final class RocketRigRenderer extends EntityRenderer<Entity> {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    private boolean loggedFirstFrame = false;
+
     /** OBJ 路径（相对 {@code assets/gtoecore/models/}）。 */
     private static final String OBJ_PATH = "obj/rocket_rig.obj";
 
@@ -89,7 +91,15 @@ public final class RocketRigRenderer extends EntityRenderer<Entity> {
                        MultiBufferSource buffer, int packedLight) {
         CompositeRenderable model = ObjDemoModels.get(OBJ_PATH);
         if (model == null) {
+            if (!loggedFirstFrame) {
+                loggedFirstFrame = true;
+                LOGGER.warn("[gtoecore] rocket_rig.obj unavailable - tier_1_rocket drawn as NOTHING");
+            }
             return;
+        }
+        if (!loggedFirstFrame) {
+            loggedFirstFrame = true;
+            LOGGER.info("[gtoecore] RocketRigRenderer drew its FIRST FRAME - override is live");
         }
         poseStack.pushPose();
         // ① 底部贴实体脚底
