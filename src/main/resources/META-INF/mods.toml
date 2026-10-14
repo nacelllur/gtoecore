@@ -62,3 +62,14 @@ mandatory=false
 versionRange="[9.2,)"
 ordering="AFTER"
 side="CLIENT"
+
+# ⛔ 火箭燃料标签真正的对手是 GTNN 的内嵌数据包（data/gtnn/ad_astra.zip）——
+#    它也写了 4 个 tier 标签且带 "replace": true（换成 GT 燃料十六烷值柴油/RP-1/肼类）。
+#    数据包优先级 = mod 加载顺序（后加载者胜）⇒ 必须排在 gtnn 之后，我们的
+#    replace: true 才会赢（2026-10-14 实测：不写这行时被 GTNN 盖回去）。
+[[dependencies.gtoecore]]
+modId="gtnn"
+mandatory=false
+versionRange="[1.3,)"
+ordering="AFTER"
+side="BOTH"
