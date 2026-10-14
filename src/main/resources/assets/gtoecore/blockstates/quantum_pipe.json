@@ -1,0 +1,129 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_center"
+      }
+    },
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub"
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "lit": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_center_active"
+      }
+    },
+    {
+      "when": {
+        "lit": "true",
+        "north": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub_active"
+      }
+    },
+    {
+      "when": {
+        "lit": "true",
+        "south": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub_active",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "lit": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub_active",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "lit": "true",
+        "east": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub_active",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "lit": "true",
+        "up": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub_active",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "lit": "true",
+        "down": "true"
+      },
+      "apply": {
+        "model": "gtoecore:block/energy/quantum_pipe_stub_active",
+        "x": 90
+      }
+    }
+  ]
+}

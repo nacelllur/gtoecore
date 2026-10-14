@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "gtoecore:block/machine/lhc_combo"
+    },
+    "facing=east": {
+      "model": "gtoecore:block/machine/lhc_combo",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "gtoecore:block/machine/lhc_combo",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gtoecore:block/machine/lhc_combo",
+      "y": 270
+    }
+  }
+}

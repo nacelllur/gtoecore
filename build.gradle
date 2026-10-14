@@ -30,6 +30,8 @@ dependencies {
     implementation files('libs/Jade-1.20.1-Forge-11.13.2.jar')
     // space_gravity 零重力 API（软依赖：仅编译期，运行时由整合包提供，缺失时桥接自动降级）
     compileOnly files('libs/space_gravity-1.0.1-nolimit-damp.jar')
+    // AE2（软件依赖：仅编译期引用其 API/GUI，运行时由整合包提供）
+    compileOnly files('libs/appliedenergistics2-forge-15.4.10.jar')
 }
 
 jar {

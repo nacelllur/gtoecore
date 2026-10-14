@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OOO",
+    "OPO",
+    "OOO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "P": {
+      "item": "minecraft:crying_obsidian"
+    }
+  },
+  "result": {
+    "item": "gtoecore:singularity_constraint_casing",
+    "count": 8
+  }
+}

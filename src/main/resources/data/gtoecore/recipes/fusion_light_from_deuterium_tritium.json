@@ -1,0 +1,43 @@
+{
+  "type": "gtceu:fusion_reactor",
+  "duration": 64,
+  "data": "{eu_to_start:40000000}",
+  "inputs": {
+    "fluid": [
+      {
+        "content": {
+          "amount": 125,
+          "value": [
+            {
+              "fluid": "gtceu:deuterium"
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "amount": 125,
+          "value": [
+            {
+              "fluid": "gtceu:tritium"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "outputs": {
+    "fluid": [
+      {
+        "content": {
+          "amount": 1000,
+          "value": [
+            {
+              "fluid": "gtoecore:fusion_light"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

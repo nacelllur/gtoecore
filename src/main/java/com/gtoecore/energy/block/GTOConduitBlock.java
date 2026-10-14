@@ -67,11 +67,17 @@ public class GTOConduitBlock extends BaseEntityBlock {
             Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST, Direction.UP, Direction.DOWN
     };
 
+    /** 激活荧光（量子管：有能量时发光；激光管可复用） */
+    public static final BooleanProperty ACTIVE = BlockStateProperties.LIT;
+
     /** 每节损耗系数（按能量形式区分；MVP 用统一基准值） */
     private static final double LOSS_ROTATION = 0.98D;
     private static final double LOSS_HEAT = 0.97D;
     private static final double LOSS_COLD = 0.97D;
     private static final double LOSS_KINETIC = 0.98D;
+    private static final double LOSS_MAGNETIC = 0.97D;
+    private static final double LOSS_LASER = 0.99D;
+    private static final double LOSS_QUANTUM = 0.995D;
 
     /** 外形：中心体（4x4x4）+ 每个连接方向一根管段（4x4x6），与 JSON 模型一致 */
     private static final VoxelShape CENTER_SHAPE = Block.box(6.0D, 6.0D, 6.0D, 10.0D, 10.0D, 10.0D);
@@ -88,14 +94,29 @@ public class GTOConduitBlock extends BaseEntityBlock {
     private static final ConcurrentHashMap<BlockState, VoxelShape> SHAPE_CACHE = new ConcurrentHashMap<>();
 
     private final GTOEnergyType fixedType;
+    /** 轴向约束（激光管 true）：只能直线连接，禁止拐弯/T/十字（对齐 GT 激光管道语义） */
+    private final boolean axialOnly;
 
     public GTOConduitBlock(Properties props, GTOEnergyType type) {
+        this(props, type, false);
+    }
+
+    public GTOConduitBlock(Properties props, GTOEnergyType type, boolean axialOnly) {
         super(props);
         this.fixedType = type;
+        this.axialOnly = axialOnly;
+        // ⚠ 不能在构造函数里 setValue(ACTIVE)：此时 stateDefinition 还没经过
+        // createBlockStateDefinition（那个在 Block.<init> 之后才调），any() 不含 ACTIVE
+        // → IllegalArgumentException "Cannot set property lit as it does not exist in Block{air}"。
+        // 六向连接属性是 BlockStateProperties 自带的（原版 Block 已经注册），safe。
         registerDefaultState(stateDefinition.any()
                 .setValue(NORTH, false).setValue(SOUTH, false)
                 .setValue(WEST, false).setValue(EAST, false)
                 .setValue(UP, false).setValue(DOWN, false));
+    }
+
+    public boolean isAxialOnly() {
+        return axialOnly;
     }
 
     public GTOEnergyType getEnergyType() {
@@ -108,17 +129,33 @@ public class GTOConduitBlock extends BaseEntityBlock {
             case HEAT -> LOSS_HEAT;
             case COLD -> LOSS_COLD;
             case KINETIC -> LOSS_KINETIC;
+            case MAGNETIC -> LOSS_MAGNETIC;
+            case LASER -> LOSS_LASER;
+            case QUANTUM -> LOSS_QUANTUM;
         };
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> b) {
         b.add(NORTH, SOUTH, WEST, EAST, UP, DOWN);
+        // ⚠ 无条件注册 ACTIVE(lit)，不依赖 supportsActive()：
+        // createBlockStateDefinition 在 super(props) 期间被 Block.<init> 调用，
+        // 那时 fixedType 字段尚未赋值（=null），按类型判断会漏注册 →
+        // 量子管 BE tick 再 getValue(ACTIVE) 直接崩 "property does not exist"。
+        // 所有导体都注册 lit（默认 false），只有量子管会用，其余永不变化，无害。
+        b.add(ACTIVE);
+    }
+
+    /** 量子管/激光管支持荧光（active 属性）；其它管为 false 保持默认态。 */
+    public boolean supportsActive() {
+        return fixedType == GTOEnergyType.QUANTUM || fixedType == GTOEnergyType.LASER;
     }
 
     /**
      * 连接判定（对齐 GTM PipeBlock.canConnect，支持 GTM 机器经桥接）：
      * 邻居是同类型导体 / 该类型发射端 / 接受该类型的接收端 才连。
+     * <p>激光管（{@code axialOnly}）额外约束：只允许同轴直线——某个方向要连，
+     * 必须能与其相对方向形成直线（把管道放成 90° 弯/T 都连不上）。</p>
      */
     public boolean canConnect(BlockGetter level, BlockPos pos, Direction dir, GTOEnergyType type) {
         BlockEntity be = level.getBlockEntity(pos.relative(dir));
@@ -132,23 +169,86 @@ public class GTOConduitBlock extends BaseEntityBlock {
         return GTOEnergyBridge.accepts(be, type, dir.getOpposite());
     }
 
+    /**
+     * 轴向约束重算：返回本块在 axialOnly 下的完整连接位（六方向）。
+     * <p>对齐 GT 激光管道「不能拐弯」：一个方块永远只连<b>一条轴线</b>——</p>
+     * <ol>
+     *   <li>三条轴（NS / WE / UD）各自统计两端是否有硬连接（同类型管道 / 产能机 / 接收端）；</li>
+     *   <li>优先选「两端都有硬连接」的轴（直线穿透）；没有则选「恰有一端硬连接」的轴（端点）；</li>
+     *   <li>被选中轴的两个方向置为连接位，其余四向全部 false。</li>
+     * </ol>
+     * 因此 90° 弯、T 形、十字在本块上天然不存在。非 axialOnly 块直接透传 rawConnect。
+     */
+    public BlockState computeAxialState(BlockGetter level, BlockPos pos, boolean[] rawConnect) {
+        if (!axialOnly) {
+            BlockState s = defaultBlockState();
+            for (int i = 0; i < CONNECTION_DIRS.length; i++) {
+                s = s.setValue(CONNECTION_PROPS[i], rawConnect[i]);
+            }
+            return s;
+        }
+        // 三条轴（NS=0,1 / WE=2,3 / UD=4,5）各自两端硬连接
+        int[][] axes = {{0, 1}, {2, 3}, {4, 5}};
+        int bestAxis = -1;
+        boolean bestBoth = false;
+        boolean[] axisHard = new boolean[3];
+        for (int a = 0; a < 3; a++) {
+            boolean h0 = isHard(level, pos, CONNECTION_DIRS[axes[a][0]]);
+            boolean h1 = isHard(level, pos, CONNECTION_DIRS[axes[a][1]]);
+            axisHard[a] = h0 || h1;
+            boolean both = h0 && h1;
+            if (both && !bestBoth) {
+                bestAxis = a; bestBoth = true;         // 优先两端都硬
+            } else if (!both && bestAxis == -1 && (h0 || h1)) {
+                bestAxis = a; bestBoth = false;        // 保底选有端点的轴
+            }
+        }
+        boolean[] conn = new boolean[6];
+        if (bestAxis >= 0) {
+            conn[axes[bestAxis][0]] = isHard(level, pos, CONNECTION_DIRS[axes[bestAxis][0]]);
+            conn[axes[bestAxis][1]] = isHard(level, pos, CONNECTION_DIRS[axes[bestAxis][1]]);
+        }
+        BlockState s = defaultBlockState();
+        for (int i = 0; i < CONNECTION_DIRS.length; i++) {
+            s = s.setValue(CONNECTION_PROPS[i], conn[i]);
+        }
+        return s;
+    }
+
+    /** 该方向邻居是否为「硬连接」（同类型管道 / 该类型产能机 / 该类型接收端）。 */
+    private boolean isHard(BlockGetter level, BlockPos pos, Direction dir) {
+        BlockEntity be = level.getBlockEntity(pos.relative(dir));
+        if (be instanceof GTOConduitBlockEntity conduit) {
+            return conduit.getBlockState().getBlock() instanceof GTOConduitBlock c
+                    && c.getEnergyType() == fixedType;
+        }
+        if (GTOEnergyBridge.isEmitter(be, fixedType)) {
+            return true;
+        }
+        return GTOEnergyBridge.accepts(be, fixedType, dir.getOpposite());
+    }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockGetter level = ctx.getLevel();
         BlockPos pos = ctx.getClickedPos();
-        BlockState state = defaultBlockState();
+        boolean[] raw = new boolean[6];
         for (int i = 0; i < CONNECTION_DIRS.length; i++) {
-            state = state.setValue(CONNECTION_PROPS[i], canConnect(level, pos, CONNECTION_DIRS[i], fixedType));
+            raw[i] = canConnect(level, pos, CONNECTION_DIRS[i], fixedType);
         }
-        return state;
+        return computeAxialState(level, pos, raw);
     }
 
     /** 邻居方块变化时重算该方向连接（= 原版栅栏/墙的同款钩子，摆机器/拆机器自动连断） */
     @Override
     public BlockState updateShape(BlockState state, Direction dir, BlockState neighborState,
                                   LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        return state.setValue(propFor(dir), canConnect(level, pos, dir, fixedType));
+        boolean[] raw = new boolean[6];
+        for (int i = 0; i < CONNECTION_DIRS.length; i++) {
+            raw[i] = canConnect(level, pos, CONNECTION_DIRS[i], fixedType);
+        }
+        return computeAxialState(level, pos, raw);
     }
 
     public static BooleanProperty propFor(Direction dir) {

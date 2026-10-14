@@ -18,7 +18,8 @@ import java.util.Map;
  *
  * <p>生效中的重力核心每 20 tick 报到一次（{@link #touch}），报到超时（100 tick，
  * 即区块卸载/核心被破坏）自动剔除。管理器每 10 tick 检查一次每个玩家：
- * 维度内存在生效核心时——位于任一核心舱室区域内 → 关闭零重力；否则 → 开启零重力。
+ * 维度内存在生效核心时——位于任一核心舱室区域内 → 关闭零重力；否则 → 开启零重力
+ * （但玩家处于骑乘（{@code isPassenger()}）时不开启，强制关闭交由 {@link RideZeroGravityGuard} 持续按住）。
  * 维度内没有核心时完全不动玩家状态（不影响普通世界与其它玩法）。</p>
  */
 @Mod.EventBusSubscriber(modid = GTNCore.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -64,7 +65,7 @@ public final class StationGravityManager {
                     break;
                 }
             }
-            boolean zeroG = !inside;
+            boolean zeroG = !inside && !player.isPassenger();   // 骑乘期间不开零重力（配合 RideZeroGravityGuard）
             if (SpaceGravityBridge.isZeroGravity(player) != zeroG) {
                 SpaceGravityBridge.setZeroGravity(player, zeroG);
             }

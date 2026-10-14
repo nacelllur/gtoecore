@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "gtoecore:block/machine/arch_rig"
+    },
+    "facing=east": {
+      "model": "gtoecore:block/machine/arch_rig",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "gtoecore:block/machine/arch_rig",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gtoecore:block/machine/arch_rig",
+      "y": 270
+    }
+  }
+}

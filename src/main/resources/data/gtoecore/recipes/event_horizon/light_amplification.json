@@ -1,0 +1,37 @@
+{
+  "type": "gtceu:event_horizon",
+  "duration": 240,
+  "inputs": {
+    "eu": [
+      {
+        "content": 32768
+      }
+    ],
+    "fluid": [
+      {
+        "content": {
+          "amount": 250,
+          "value": [
+            {
+              "fluid": "gtoecore:fusion_light"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "outputs": {
+    "fluid": [
+      {
+        "content": {
+          "amount": 1000,
+          "value": [
+            {
+              "fluid": "gtoecore:quantum_energy"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

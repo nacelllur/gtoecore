@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "gtoecore:block/obj/turbine_base"
+  },
+  "elements": []
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtoecore:block/singularity_constraint_casing"
+    }
+  }
+}

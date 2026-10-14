@@ -89,6 +89,15 @@ public class GTOConduitBlockEntity extends BlockEntity {
             lastSynced = value;
             setChanged();
         }
+        // 量子管荧光：有能量（>0）时点亮 ACTIVE，断供归零后熄灭
+        if (conduit.supportsActive()) {
+            boolean shouldActive = newBest > 0L;
+            if (state.getValue(GTOConduitBlock.ACTIVE) != shouldActive) {
+                level.setBlock(pos, state.setValue(GTOConduitBlock.ACTIVE, shouldActive),
+                        net.minecraft.world.level.block.Block.UPDATE_CLIENTS);
+                setChanged();
+            }
+        }
     }
 
     /** 从产能机器（含 GTM 桥接）拉取当前值。 */

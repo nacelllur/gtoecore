@@ -13,6 +13,13 @@
 /build_*.log
 /build_log.txt
 *.txt
+# ⚠ 碰撞表（structures/*.txt）是正式资源，必须入库 —— 把上面的 *.txt 白名单放回来
+!/src/main/resources/assets/gtoecore/structures/
+!/src/main/resources/assets/gtoecore/structures/*.txt
+
+# 生成预览图 / 动画素材源（不入库）
+/tools/_preview/
+/tools/meme_src/
 
 # IDE / 系统
 .idea/

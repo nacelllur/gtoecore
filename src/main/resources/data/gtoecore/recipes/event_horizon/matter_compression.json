@@ -1,0 +1,32 @@
+{
+  "type": "gtceu:event_horizon",
+  "duration": 120,
+  "inputs": {
+    "eu": [
+      {
+        "content": 8192
+      }
+    ],
+    "item": [
+      {
+        "content": {
+          "item": "minecraft:obsidian"
+        }
+      }
+    ]
+  },
+  "outputs": {
+    "fluid": [
+      {
+        "content": {
+          "amount": 50,
+          "value": [
+            {
+              "fluid": "gtoecore:quantum_energy"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

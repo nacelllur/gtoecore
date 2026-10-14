@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PEP",
+    "FHF",
+    "PMP"
+  ],
+  "key": {
+    "P": {
+      "item": "gtceu:stainless_steel_plate"
+    },
+    "E": {
+      "item": "gtceu:hv_energy_output_hatch"
+    },
+    "F": {
+      "item": "gtceu:hv_input_hatch"
+    },
+    "M": {
+      "item": "gtceu:maintenance_hatch"
+    },
+    "H": {
+      "item": "gtceu:hv_machine_hull"
+    }
+  },
+  "result": {
+    "item": "gtoecore:tower_rig",
+    "count": 1
+  }
+}

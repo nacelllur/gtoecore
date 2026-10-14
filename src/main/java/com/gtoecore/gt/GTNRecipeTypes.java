@@ -35,6 +35,9 @@ public final class GTNRecipeTypes {
     /** 深空探索配方类型（注册 id：gtceu:deep_space_exploration；显示名：深空探索 / Deep Space Exploration） */
     public static GTRecipeType DEEP_SPACE_EXPLORATION_RECIPES;
 
+    /** 事件视界配方类型（注册 id：gtceu:event_horizon；显示名：事件视界 / Event Horizon） */
+    public static GTRecipeType EVENT_HORIZON_RECIPES;
+
     public static void init() {
         BIO_RECIPES = GTRecipeTypes.register("bio", GTRecipeTypes.ELECTRIC)
                 // 物品输入 9 / 输出 3，流体输入 4 / 输出 3（生物配方按材料+培养液规模取宽）
@@ -69,6 +72,17 @@ public final class GTNRecipeTypes {
                         ProgressTexture.FillDirection.LEFT_TO_RIGHT)
                 .setIconSupplier(() -> GTNMachines.DRONE_SWARM_HEART == null
                         ? ItemStack.EMPTY : GTNMachines.DRONE_SWARM_HEART.asStack())
+                .setSound(GTSoundEntries.COMPUTATION);
+
+        // 事件视界：把物质"喂"进黑洞换取高能产物；能量输入是硬需求（EU IO = IN）。
+        EVENT_HORIZON_RECIPES = GTRecipeTypes.register("event_horizon", GTRecipeTypes.ELECTRIC)
+                .setMaxIOSize(6, 6, 3, 3)
+                .setEUIO(IO.IN)
+                .setSlotOverlay(false, false, GuiTextures.INT_CIRCUIT_OVERLAY)
+                .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE,
+                        ProgressTexture.FillDirection.LEFT_TO_RIGHT)
+                .setIconSupplier(() -> GTNMachines.EVENT_HORIZON_ENGINE == null
+                        ? ItemStack.EMPTY : GTNMachines.EVENT_HORIZON_ENGINE.asStack())
                 .setSound(GTSoundEntries.COMPUTATION);
     }
 

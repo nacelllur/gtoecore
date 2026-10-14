@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "PHP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "gtceu:stainless_steel_plate"
+    },
+    "H": {
+      "item": "gtceu:hv_machine_hull"
+    }
+  },
+  "result": {
+    "item": "gtoecore:maimai_rig",
+    "count": 1
+  }
+}

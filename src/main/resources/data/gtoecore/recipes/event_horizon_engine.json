@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PNP",
+    "HCH",
+    "PNP"
+  ],
+  "key": {
+    "P": {
+      "item": "gtceu:tungsten_steel_plate"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    },
+    "H": {
+      "item": "gtceu:uv_machine_hull"
+    },
+    "C": {
+      "item": "gtoecore:singularity_constraint_casing"
+    }
+  },
+  "result": {
+    "item": "gtoecore:event_horizon_engine",
+    "count": 1
+  }
+}

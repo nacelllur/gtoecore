@@ -1,0 +1,114 @@
+{
+  "variants": {
+    "facing=down,upwards_facing=east": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "x": 90,
+      "gtceu:z": 90
+    },
+    "facing=down,upwards_facing=north": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "x": 90
+    },
+    "facing=down,upwards_facing=south": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "x": 90,
+      "gtceu:z": 180
+    },
+    "facing=down,upwards_facing=west": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "x": 90,
+      "gtceu:z": 270
+    },
+    "facing=east,upwards_facing=east": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 90,
+      "gtceu:z": 270
+    },
+    "facing=east,upwards_facing=north": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 90
+    },
+    "facing=east,upwards_facing=south": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 90,
+      "gtceu:z": 180
+    },
+    "facing=east,upwards_facing=west": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 90,
+      "gtceu:z": 90
+    },
+    "facing=north,upwards_facing=east": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "gtceu:z": 270
+    },
+    "facing=north,upwards_facing=north": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core"
+    },
+    "facing=north,upwards_facing=south": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "gtceu:z": 180
+    },
+    "facing=north,upwards_facing=west": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "gtceu:z": 90
+    },
+    "facing=south,upwards_facing=east": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 180,
+      "gtceu:z": 270
+    },
+    "facing=south,upwards_facing=north": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 180
+    },
+    "facing=south,upwards_facing=south": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 180,
+      "gtceu:z": 180
+    },
+    "facing=south,upwards_facing=west": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 180,
+      "gtceu:z": 90
+    },
+    "facing=up,upwards_facing=east": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "x": 270,
+      "gtceu:z": 90
+    },
+    "facing=up,upwards_facing=north": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "x": 270,
+      "gtceu:z": 180
+    },
+    "facing=up,upwards_facing=south": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "x": 270
+    },
+    "facing=up,upwards_facing=west": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "x": 270,
+      "gtceu:z": 270
+    },
+    "facing=west,upwards_facing=east": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 270,
+      "gtceu:z": 270
+    },
+    "facing=west,upwards_facing=north": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 270
+    },
+    "facing=west,upwards_facing=south": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 270,
+      "gtceu:z": 180
+    },
+    "facing=west,upwards_facing=west": {
+      "model": "gtoecore:block/machine/uv_lumina_fusion_core",
+      "y": 270,
+      "gtceu:z": 90
+    }
+  }
+}

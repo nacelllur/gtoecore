@@ -1,0 +1,20 @@
+# GTOE turbine demo materials
+newmtl base_mat
+Ka 1.0 1.0 1.0
+Kd 1.0 1.0 1.0
+map_Kd gtoecore:block/obj/turbine_base
+
+newmtl housing_mat
+Ka 1.0 1.0 1.0
+Kd 1.0 1.0 1.0
+map_Kd gtoecore:block/obj/turbine_housing
+
+newmtl rotor_mat
+Ka 1.0 1.0 1.0
+Kd 1.0 1.0 1.0
+map_Kd gtoecore:block/obj/turbine_rotor
+
+newmtl shaft_mat
+Ka 1.0 1.0 1.0
+Kd 1.0 1.0 1.0
+map_Kd gtoecore:block/obj/turbine_shaft

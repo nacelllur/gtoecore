@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:block/block",
+  "dynamic_renders": [
+    {
+      "type": "gtoecore:cms_rig"
+    }
+  ],
+  "loader": "gtceu:machine",
+  "machine": "gtoecore:cms_rig",
+  "texture_overrides": {
+    "all": "gtceu:block/casings/solid/machine_casing_solid_steel"
+  },
+  "variants": {
+    "is_formed=false": {
+      "model": {
+        "parent": "gtceu:block/machine/template/cube_all/sided",
+        "textures": {
+          "all": "gtceu:block/casings/solid/machine_casing_solid_steel",
+          "overlay_front": "gtceu:block/multiblock/generator/large_combustion_engine/overlay_front",
+          "overlay_front_emissive": "gtceu:block/multiblock/generator/large_combustion_engine/overlay_front_emissive"
+        }
+      }
+    },
+    "is_formed=true": {
+      "model": {
+        "parent": "gtceu:block/machine/template/cube_all/sided",
+        "textures": {
+          "all": "gtceu:block/casings/solid/machine_casing_solid_steel",
+          "overlay_front": "gtceu:block/multiblock/generator/large_combustion_engine/overlay_front_active",
+          "overlay_front_emissive": "gtceu:block/multiblock/generator/large_combustion_engine/overlay_front_active_emissive"
+        }
+      }
+    }
+  }
+}

@@ -1,19 +1,26 @@
 package com.gtoecore.gt;
 
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
+import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.TickableSubscription;
+import com.gregtechceu.gtceu.api.machine.feature.IFancyUIMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.TieredIOPartMachine;
 import com.gtoecore.energy.GTOEnergyType;
 import com.gtoecore.energy.IGTOEnergyAcceptor;
 import com.gtoecore.energy.IGTOEnergyHost;
-import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
+import com.lowdragmc.lowdraglib.gui.texture.IGuiTexture;
+import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
+import com.lowdragmc.lowdraglib.gui.widget.Widget;
+import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.EnumMap;
@@ -36,16 +43,14 @@ import java.util.Map;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class GTOEnergyInputHatchPartMachine extends TieredIOPartMachine
-        implements IGTOEnergyAcceptor, IGTOEnergyHost {
+        implements IGTOEnergyAcceptor, IGTOEnergyHost, IFancyUIMachine {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER =
             new ManagedFieldHolder(GTOEnergyInputHatchPartMachine.class, TieredIOPartMachine.MANAGED_FIELD_HOLDER);
 
-    /** 四种能量的实时值（RU=rpm / HU=K / CU=K / KU=kPa） */
-    @Persisted
+    /** 四种能量的实时值（RU=rpm / HU=K / CU=K / KU=kPa）—— 普通字段，手动 NBT 持久化 */
     public final Map<GTOEnergyType, Long> values = new EnumMap<>(GTOEnergyType.class);
     /** 各类型最近一次注入的 gameTime */
-    @Persisted
     public final Map<GTOEnergyType, Long> lastInject = new EnumMap<>(GTOEnergyType.class);
     /** 服务端订阅 */
     protected TickableSubscription watchSub;
@@ -117,10 +122,51 @@ public class GTOEnergyInputHatchPartMachine extends TieredIOPartMachine
                 ? values.getOrDefault(type, 0L) : 0L;
     }
 
-    // ---------------- UI：仓不开放界面（纯信号部件） ----------------
+    // ---------------- 持久化（手动 NBT：LDLib 的 @Persisted 不支持 Map） ----------------
 
     @Override
-    public boolean shouldOpenUI(Player player, InteractionHand hand, BlockHitResult hit) {
-        return false;
+    public void saveCustomPersistedData(@NotNull CompoundTag tag, boolean forDrop) {
+        super.saveCustomPersistedData(tag, forDrop);
+        CompoundTag data = new CompoundTag();
+        for (GTOEnergyType t : GTOEnergyType.values()) {
+            data.putLong("v_" + t.getSerializedName(), values.getOrDefault(t, 0L));
+            data.putLong("t_" + t.getSerializedName(), lastInject.getOrDefault(t, -100L));
+        }
+        tag.put("GTOEnergy", data);
+    }
+
+    @Override
+    public void loadCustomPersistedData(@NotNull CompoundTag tag) {
+        super.loadCustomPersistedData(tag);
+        if (!tag.contains("GTOEnergy")) return;
+        CompoundTag data = tag.getCompound("GTOEnergy");
+        for (GTOEnergyType t : GTOEnergyType.values()) {
+            values.put(t, data.getLong("v_" + t.getSerializedName()));
+            lastInject.put(t, data.getLong("t_" + t.getSerializedName()));
+        }
+    }
+
+    // ---------------- UI（GTM FancyUI：全部能量实时读数） ----------------
+
+    @Override
+    public Widget createUIWidget() {
+        WidgetGroup group = new WidgetGroup(0, 0, 176, 166);
+        group.setBackground(new IGuiTexture[]{GuiTextures.BACKGROUND_INVERSE});
+        // 标题
+        group.addWidget(new LabelWidget(8, 6, "GTOE 能量输入仓").setTextColor(0xFFFFFF));
+        // 逐行显示每种能量的实时值（含断供检查：断供 20 tick 显示 --）
+        int y = 28;
+        for (GTOEnergyType t : GTOEnergyType.values()) {
+            final GTOEnergyType type = t;
+            group.addWidget(new LabelWidget(10, y, () -> {
+                long v = getGTOEnergyValue(type);
+                if (v <= 0L) {
+                    return type.getDisplayName() + ":  --";
+                }
+                return type.getDisplayName() + ":  " + v + " " + type.getUnit();
+            }).setTextColor(0xE0E0E0));
+            y += 14;
+        }
+        return group;
     }
 }

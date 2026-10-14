@@ -1,0 +1,95 @@
+{
+  "parent": "minecraft:block/block",
+  "dynamic_renders": [
+    {
+      "type": "gtoecore:event_horizon"
+    }
+  ],
+  "loader": "gtceu:machine",
+  "machine": "gtoecore:event_horizon_engine",
+  "texture_overrides": {
+    "all": "gtoecore:block/casing/singularity_constraint_casing"
+  },
+  "variants": {
+    "is_formed=false,recipe_logic_status=idle": {
+      "model": {
+        "parent": "gtceu:block/machine/template/cube_all/sided",
+        "textures": {
+          "all": "gtoecore:block/casing/singularity_constraint_casing",
+          "overlay_front": "gtoecore:block/multiblock/event_horizon_engine/overlay_front",
+          "overlay_front_emissive": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_emissive"
+        }
+      }
+    },
+    "is_formed=false,recipe_logic_status=suspend": {
+      "model": {
+        "parent": "gtceu:block/machine/template/cube_all/sided",
+        "textures": {
+          "all": "gtoecore:block/casing/singularity_constraint_casing",
+          "overlay_front": "gtoecore:block/multiblock/event_horizon_engine/overlay_front",
+          "overlay_front_emissive": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_emissive"
+        }
+      }
+    },
+    "is_formed=false,recipe_logic_status=waiting": {
+      "model": {
+        "parent": "gtceu:block/machine/template/cube_all/sided",
+        "textures": {
+          "all": "gtoecore:block/casing/singularity_constraint_casing",
+          "overlay_front": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_active",
+          "overlay_front_emissive": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_active_emissive"
+        }
+      }
+    },
+    "is_formed=false,recipe_logic_status=working": {
+      "model": {
+        "parent": "gtceu:block/machine/template/cube_all/sided",
+        "textures": {
+          "all": "gtoecore:block/casing/singularity_constraint_casing",
+          "overlay_front": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_active",
+          "overlay_front_emissive": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_active_emissive"
+        }
+      }
+    },
+    "is_formed=true,recipe_logic_status=idle": {
+      "model": {
+        "parent": "gtceu:block/machine/template/cube_all/sided",
+        "textures": {
+          "all": "gtoecore:block/casing/singularity_constraint_casing",
+          "overlay_front": "gtoecore:block/multiblock/event_horizon_engine/overlay_front",
+          "overlay_front_emissive": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_emissive"
+        }
+      }
+    },
+    "is_formed=true,recipe_logic_status=suspend": {
+      "model": {
+        "parent": "gtceu:block/machine/template/cube_all/sided",
+        "textures": {
+          "all": "gtoecore:block/casing/singularity_constraint_casing",
+          "overlay_front": "gtoecore:block/multiblock/event_horizon_engine/overlay_front",
+          "overlay_front_emissive": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_emissive"
+        }
+      }
+    },
+    "is_formed=true,recipe_logic_status=waiting": {
+      "model": {
+        "parent": "gtceu:block/machine/template/cube_all/sided",
+        "textures": {
+          "all": "gtoecore:block/casing/singularity_constraint_casing",
+          "overlay_front": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_active",
+          "overlay_front_emissive": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_active_emissive"
+        }
+      }
+    },
+    "is_formed=true,recipe_logic_status=working": {
+      "model": {
+        "parent": "gtceu:block/machine/template/cube_all/sided",
+        "textures": {
+          "all": "gtoecore:block/casing/singularity_constraint_casing",
+          "overlay_front": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_active",
+          "overlay_front_emissive": "gtoecore:block/multiblock/event_horizon_engine/overlay_front_active_emissive"
+        }
+      }
+    }
+  }
+}

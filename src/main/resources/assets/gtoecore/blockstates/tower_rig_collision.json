@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtoecore:block/obj_collision_empty"
+    }
+  }
+}

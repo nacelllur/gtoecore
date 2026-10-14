@@ -1,0 +1,76 @@
+{
+  "variants": {
+    "inner=down,open=false,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_down"
+    },
+    "inner=down,open=false,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_down"
+    },
+    "inner=down,open=true,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_down"
+    },
+    "inner=down,open=true,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_down"
+    },
+    "inner=up,open=false,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_up"
+    },
+    "inner=up,open=false,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_up"
+    },
+    "inner=up,open=true,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_up"
+    },
+    "inner=up,open=true,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_up"
+    },
+    "inner=north,open=false,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_north"
+    },
+    "inner=north,open=false,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_north"
+    },
+    "inner=north,open=true,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_north"
+    },
+    "inner=north,open=true,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_north"
+    },
+    "inner=south,open=false,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_south"
+    },
+    "inner=south,open=false,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_south"
+    },
+    "inner=south,open=true,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_south"
+    },
+    "inner=south,open=true,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_south"
+    },
+    "inner=west,open=false,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_west"
+    },
+    "inner=west,open=false,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_west"
+    },
+    "inner=west,open=true,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_west"
+    },
+    "inner=west,open=true,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_west"
+    },
+    "inner=east,open=false,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_east"
+    },
+    "inner=east,open=false,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_east"
+    },
+    "inner=east,open=true,signal=false": {
+      "model": "gtoecore:block/hull_viewport_inner_east"
+    },
+    "inner=east,open=true,signal=true": {
+      "model": "gtoecore:block/hull_viewport_inner_east"
+    }
+  }
+}

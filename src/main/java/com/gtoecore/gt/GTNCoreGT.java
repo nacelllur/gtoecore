@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -60,19 +61,28 @@ public class GTNCoreGT {
                         output.accept(GTNItems.BIO_CLUSTER.get());
                         output.accept(GTNItems.STATION_GRAVITY_CORE.get());
                         output.accept(GTNItems.PV_PANEL.get());
+                        // 全周天舱壁：基础 + 全部皮肤变种（遍历，新增皮肤自动进栏）
+                        for (RegistryObject<Item> hull : GTNItems.allHullViewportItems()) {
+                            output.accept(hull.get());
+                        }
                         output.accept(GTNItems.PRIMITIVE_COMPUTER_CASING.get());
                         output.accept(GTNItems.PRIMITIVE_HEAT_VENT.get());
                         output.accept(GTNItems.PRIMITIVE_EMPTY_COMPONENT.get());
                         output.accept(GTNItems.PRIMITIVE_COMPUTATION_COMPONENT.get());
                         output.accept(GTNItems.DEEP_SPACE_FUEL.get());
-                        // GT6 风味能量系统：导体四件套 + 产能机 + 接收端 + 消费端
+                        output.accept(GTNItems.SINGULARITY_CONSTRAINT_CASING.get());
+                        // GT6 风味能量系统：导体四件套 + 激光/量子管道 + 产能机 + 接收端 + 消费端
                         output.accept(GTNItems.ROTATION_AXLE.get());
                         output.accept(GTNItems.HEAT_PIPE.get());
                         output.accept(GTNItems.COLD_PIPE.get());
                         output.accept(GTNItems.KINETIC_ROD.get());
-                        output.accept(GTNItems.COMBUSTION_ENGINE.get());
+                        output.accept(GTNItems.LASER_PIPE.get());
+                        output.accept(GTNItems.QUANTUM_PIPE.get());
+                        // 燃烧引擎已是 GTM 机器，由上方 REGISTERED 循环自动带入
                         output.accept(GTNItems.SPEED_DETECTOR.get());
                         output.accept(GTNItems.ROTARY_MILL.get());
+                        // OBJ 示范机器（外部模型 + BER）；塔架已是 GT 机器，走 REGISTERED 循环
+                        output.accept(com.gtoecore.objdemo.GTOEObjDemo.TURBINE_DEMO_ITEM.get());
                         // 无人机：探测/开采 × LV~MAX（按等级成对排列）
                         for (int tier = com.gregtechceu.gtceu.api.GTValues.LV;
                              tier <= com.gregtechceu.gtceu.api.GTValues.MAX; tier++) {
@@ -121,18 +131,25 @@ public class GTNCoreGT {
             e.accept(GTNItems.BIO_CLUSTER.get());
             e.accept(GTNItems.STATION_GRAVITY_CORE.get());
             e.accept(GTNItems.PV_PANEL.get());
+            for (RegistryObject<Item> hull : GTNItems.allHullViewportItems()) {
+                e.accept(hull.get());
+            }
             e.accept(GTNItems.PRIMITIVE_COMPUTER_CASING.get());
             e.accept(GTNItems.PRIMITIVE_HEAT_VENT.get());
             e.accept(GTNItems.PRIMITIVE_EMPTY_COMPONENT.get());
             e.accept(GTNItems.PRIMITIVE_COMPUTATION_COMPONENT.get());
             e.accept(GTNItems.DEEP_SPACE_FUEL.get());
+            e.accept(GTNItems.SINGULARITY_CONSTRAINT_CASING.get());
             e.accept(GTNItems.ROTATION_AXLE.get());
             e.accept(GTNItems.HEAT_PIPE.get());
             e.accept(GTNItems.COLD_PIPE.get());
             e.accept(GTNItems.KINETIC_ROD.get());
-            e.accept(GTNItems.COMBUSTION_ENGINE.get());
+            e.accept(GTNItems.LASER_PIPE.get());
+            e.accept(GTNItems.QUANTUM_PIPE.get());
+            // 燃烧引擎已是 GTM 机器，由 REGISTERED 循环自动带入
             e.accept(GTNItems.SPEED_DETECTOR.get());
             e.accept(GTNItems.ROTARY_MILL.get());
+            e.accept(com.gtoecore.objdemo.GTOEObjDemo.TURBINE_DEMO_ITEM.get());
             for (int tier = com.gregtechceu.gtceu.api.GTValues.LV;
                  tier <= com.gregtechceu.gtceu.api.GTValues.MAX; tier++) {
                 if (GTNItems.SURVEY_DRONES[tier] != null) {

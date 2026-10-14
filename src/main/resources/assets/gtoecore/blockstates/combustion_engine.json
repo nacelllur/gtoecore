@@ -1,33 +1,18 @@
 {
   "variants": {
-    "facing=north,lit=false": {
-      "model": "gtoecore:block/combustion_engine"
+    "facing=north": {
+      "model": "gtoecore:block/machine/combustion_engine"
     },
-    "facing=south,lit=false": {
-      "model": "gtoecore:block/combustion_engine",
+    "facing=south": {
+      "model": "gtoecore:block/machine/combustion_engine",
       "y": 180
     },
-    "facing=west,lit=false": {
-      "model": "gtoecore:block/combustion_engine",
+    "facing=west": {
+      "model": "gtoecore:block/machine/combustion_engine",
       "y": 270
     },
-    "facing=east,lit=false": {
-      "model": "gtoecore:block/combustion_engine",
-      "y": 90
-    },
-    "facing=north,lit=true": {
-      "model": "gtoecore:block/combustion_engine_lit"
-    },
-    "facing=south,lit=true": {
-      "model": "gtoecore:block/combustion_engine_lit",
-      "y": 180
-    },
-    "facing=west,lit=true": {
-      "model": "gtoecore:block/combustion_engine_lit",
-      "y": 270
-    },
-    "facing=east,lit=true": {
-      "model": "gtoecore:block/combustion_engine_lit",
+    "facing=east": {
+      "model": "gtoecore:block/machine/combustion_engine",
       "y": 90
     }
   }

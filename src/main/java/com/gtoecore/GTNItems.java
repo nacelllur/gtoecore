@@ -4,6 +4,8 @@ import com.gregtechceu.gtceu.api.GTValues;
 import com.gtoecore.item.GTNCloneItem;
 import com.gtoecore.item.GTNDroneItem;
 import com.gtoecore.item.RotaryMillItem;
+import com.gtoecore.station.HullViewportItem;
+import com.gtoecore.station.PanelSkin;
 import com.gtoecore.station.StationGravityCoreItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -12,7 +14,11 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * gtoecore 普通物品注册（克隆体 / 生物团 / 无人机）。
@@ -50,6 +56,48 @@ public final class GTNItems {
             ITEMS.register("pv_panel",
                     () -> new BlockItem(GTNBlocks.PV_PANEL.get(), new Item.Properties()));
 
+    /** 全周天舱壁 —— 单向舷窗方块（带说明文本） */
+    public static final RegistryObject<Item> HULL_VIEWPORT =
+            ITEMS.register("hull_viewport",
+                    () -> new HullViewportItem(GTNBlocks.HULL_VIEWPORT.get(), new Item.Properties()));
+
+    // 全周天舱壁皮肤变种（只换关闭态朝内面的纹理）——
+    // 与 GTNBlocks 一样**遍历 PanelSkin 注册**，新增皮肤不需要改这里。
+
+    /** 皮肤 → 变种物品 */
+    private static final Map<PanelSkin, RegistryObject<Item>> HULL_VARIANT_ITEMS =
+            new EnumMap<>(PanelSkin.class);
+
+    static {
+        for (PanelSkin skin : PanelSkin.values()) {
+            if (skin == PanelSkin.HEX) {
+                continue;
+            }
+            HULL_VARIANT_ITEMS.put(skin, ITEMS.register("hull_viewport_" + skin.id(),
+                    () -> new HullViewportItem(GTNBlocks.hullViewport(skin).get(), new Item.Properties())));
+        }
+    }
+
+    /** 六面蜂窝舱壁（六个面都是蜂窝面板的实心墙块）。 */
+    public static final RegistryObject<Item> HULL_PANEL_HEX =
+            ITEMS.register("hull_panel_hex",
+                    () -> new HullViewportItem(GTNBlocks.HULL_PANEL_HEX.get(), new Item.Properties(), true));
+
+    /** 取某个皮肤的舱壁物品；{@link PanelSkin#HEX} 返回基础物品 {@link #HULL_VIEWPORT}。 */
+    public static RegistryObject<Item> hullViewportItem(PanelSkin skin) {
+        return skin == PanelSkin.HEX ? HULL_VIEWPORT : HULL_VARIANT_ITEMS.get(skin);
+    }
+
+    /** 全部舱壁物品（基础 + 皮肤变种 + 六面蜂窝版）。 */
+    public static List<RegistryObject<Item>> allHullViewportItems() {
+        List<RegistryObject<Item>> out = new ArrayList<>(PanelSkin.values().length + 1);
+        for (PanelSkin skin : PanelSkin.values()) {
+            out.add(hullViewportItem(skin));
+        }
+        out.add(HULL_PANEL_HEX);
+        return out;
+    }
+
     // ---------------- GT6 风味能量系统方块物品 ----------------
 
     /** 旋转轴（RU 导体） */
@@ -72,10 +120,17 @@ public final class GTNItems {
             ITEMS.register("kinetic_rod",
                     () -> new BlockItem(GTNBlocks.KINETIC_ROD.get(), new Item.Properties()));
 
-    /** 燃烧引擎（RU 产能机） */
-    public static final RegistryObject<Item> COMBUSTION_ENGINE =
-            ITEMS.register("combustion_engine",
-                    () -> new BlockItem(GTNBlocks.COMBUSTION_ENGINE.get(), new Item.Properties()));
+    /** 激光能管道（LU 导体）—— 直线不能拐弯 */
+    public static final RegistryObject<Item> LASER_PIPE =
+            ITEMS.register("laser_pipe",
+                    () -> new BlockItem(GTNBlocks.LASER_PIPE.get(), new Item.Properties()));
+
+    /** 量子能管道（QU 导体）—— Mek 风格，有能量时发荧光 */
+    public static final RegistryObject<Item> QUANTUM_PIPE =
+            ITEMS.register("quantum_pipe",
+                    () -> new BlockItem(GTNBlocks.QUANTUM_PIPE.get(), new Item.Properties()));
+
+    /** 燃烧引擎已迁移为 GTM 机器（GTNMachines.COMBUSTION_ENGINE），物品由机器自动注册 */
 
     /** 转速检测器（RU 接收端 → 红石） */
     public static final RegistryObject<Item> SPEED_DETECTOR =
@@ -109,6 +164,12 @@ public final class GTNItems {
     public static final RegistryObject<Item> PRIMITIVE_COMPUTATION_COMPONENT =
             ITEMS.register("primitive_computation_component",
                     () -> new BlockItem(GTNBlocks.PRIMITIVE_COMPUTATION_COMPONENT.get(),
+                            new Item.Properties()));
+
+    /** 奇点约束外壳 —— 事件视界引擎结构方块（35³ 球面线框笼的骨架 + 赤道总线环） */
+    public static final RegistryObject<Item> SINGULARITY_CONSTRAINT_CASING =
+            ITEMS.register("singularity_constraint_casing",
+                    () -> new BlockItem(GTNBlocks.SINGULARITY_CONSTRAINT_CASING.get(),
                             new Item.Properties()));
 
     /**

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "gtoecore:block/station/hull_panel_hex_tile"
+  }
+}

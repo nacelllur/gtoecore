@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "gtoecore:block/machine/ev_quantum_condenser"
+    },
+    "facing=south": {
+      "model": "gtoecore:block/machine/ev_quantum_condenser",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gtoecore:block/machine/ev_quantum_condenser",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "gtoecore:block/machine/ev_quantum_condenser",
+      "y": 90
+    }
+  }
+}

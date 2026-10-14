@@ -19,11 +19,25 @@ public enum GTOEnergyType implements StringRepresentable {
     HEAT("hu", "热能", "K"),
     /** 冷能（CU）：计量 = 温度 K；配方区间 = 可用低温带 */
     COLD("cu", "冷能", "K"),
-    /** 动能（KU，活塞/气动推动）：计量 = 压强 kPa；预留 */
-    KINETIC("ku", "动能", "kPa");
+    /** 动能（KU，活塞/气动推动）：计量 = 压强 kPa */
+    KINETIC("ku", "动能", "kPa"),
+    /** 磁场能（MU）：计量 = 磁感应强度 T（特斯拉） */
+    MAGNETIC("mu", "磁场能", "T"),
+    /** 激光能（LU）：计量 = 光功率 W（瓦特） */
+    LASER("lu", "激光能", "W"),
+    /** 量子能（QU）：计量 = 量子通量 QU */
+    QUANTUM("qu", "量子能", "QU");
 
     /** NBT / codec 序列化用编解码器 */
     public static final Codec<GTOEnergyType> CODEC = StringRepresentable.fromEnum(GTOEnergyType::values);
+
+    /** 按序列化名（"ru"/"hu"/…）反查，找不到返回 null */
+    public static GTOEnergyType byName(String name) {
+        for (GTOEnergyType t : values()) {
+            if (t.getSerializedName().equals(name)) return t;
+        }
+        return null;
+    }
 
     private final String id;
     private final String displayName;
