@@ -126,6 +126,15 @@ public final class RocketRigRenderer extends EntityRenderer<Entity> {
     }
 
     /**
+     * 关掉悬浮名牌：物品 NBT 的 {@code display.Name} 会被带进实体原样显示，
+     * 20~40 格高的火箭头顶挂一行小字既出戏又挡视线。整类禁用（含潜伏键查看）。
+     */
+    @Override
+    protected boolean shouldShowName(Entity entity) {
+        return false;
+    }
+
+    /**
      * 视锥剔除：用模型实际体积（3×3×高）而不是实体那 1.1×4.6 的小碰撞箱。
      *
      * <p>⚠ 不调用 {@code entity.shouldRender(...)} —— 它内部用实体碰撞箱（1.1×4.6）算
