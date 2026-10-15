@@ -84,10 +84,12 @@ public final class RigBakedMesh implements AutoCloseable {
     /**
      * 缓存上限 = 同时保留的「渲染器 + 模型 + 朝向 + 光照」组合数。
      *
-     * <p>典型占用：3 台机器 × 4 个水平朝向 = 12 条（同一个基地里光照等级通常一致）。
-     * 每条 ≈ 1.2 MB 显存，所以上限给 24 足够宽裕。</p>
+     * <p>典型占用：8 台机架 × 4 个水平朝向 = 32 条，再加 3 台火箭 × 4 个
+     * 90° 量化朝向 = 12 条（{@link RocketRigRenderer} 复用本类烘 VBO），
+     * 合计 44 —— 所以上限给 64 才能避免边烘边丢（同一个基地里光照等级通常一致）。
+     * 每条 ≈ 1.2 MB 显存，64 条约 77 MB，可接受。</p>
      */
-    private static final int MAX_CACHE = 24;
+    private static final int MAX_CACHE = 64;
 
     /** 「重烘风暴」判据：5 秒内重烘超过这个次数就警告一次（说明缓存在被反复冲掉）。 */
     private static final int STORM_BAKES = 16;
