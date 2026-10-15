@@ -42,7 +42,8 @@ public final class RocketRigClient {
     private static final List<Overlay> OVERLAYS = List.of(
             new Overlay("tier_1_rocket", RocketRigRenderer::tier1),
             new Overlay("tier_2_rocket", RocketRigRenderer::tier2),
-            new Overlay("tier_3_rocket", RocketRigRenderer::tier3));
+            new Overlay("tier_3_rocket", RocketRigRenderer::tier3),
+            new Overlay("tier_4_rocket", RocketRigRenderer::tier4));
 
     private record Overlay(String path, Function<EntityRendererProvider.Context, RocketRigRenderer> factory) {
         ResourceLocation id() {

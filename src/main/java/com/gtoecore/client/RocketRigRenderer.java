@@ -47,6 +47,7 @@ import org.slf4j.Logger;
  *   <tr><td>1</td><td>rocket_rig.obj</td><td>0.8587</td><td>≈20.85 格</td></tr>
  *   <tr><td>2</td><td>falcon_rig.obj</td><td>0.5676</td><td>≈39.74 格</td></tr>
  *   <tr><td>3</td><td>next_rig.obj</td><td>0.4518</td><td>≈34.34 格</td></tr>
+ *   <tr><td>4</td><td>quad_rig.obj</td><td>0.4478</td><td>≈42.63 格</td></tr>
  * </table>
  *
  * <p><b>光照</b>：{@code FULL_BRIGHT}（火箭是自发光人造物，
@@ -97,6 +98,12 @@ public final class RocketRigRenderer extends EntityRenderer<Entity> {
     public static RocketRigRenderer tier3(EntityRendererProvider.Context ctx) {
         return new RocketRigRenderer(ctx, "obj/next_rig.obj", 0.4518F, 0.0F, 0.0F,
                 "tier_3_rocket", 34.34D, 1.6D);
+    }
+
+    /** 四级火箭（quad_rig.obj，3×3×≈42.63 格）。 */
+    public static RocketRigRenderer tier4(EntityRendererProvider.Context ctx) {
+        return new RocketRigRenderer(ctx, "obj/quad_rig.obj", 0.4478F, 0.0F, 0.0F,
+                "tier_4_rocket", 42.63D, 1.6D);
     }
 
     private RocketRigRenderer(EntityRendererProvider.Context context,
